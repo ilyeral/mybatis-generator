@@ -131,6 +131,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <!--suppress UnresolvedMavenProperty -->
           <argLine>${jacoco.agent.arg} -Xmx1024m -XX:MaxPermSize=256m</argLine>
         </configuration>
       </plugin>
@@ -232,12 +233,6 @@
           <configLocation>${checkstyle.config}</configLocation>
         </configuration>
       </plugin>
-      <!-- added for JDK 10 -->
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.5</version>
-      </plugin>
     </plugins>
   </reporting>
 
@@ -338,12 +333,7 @@
 
   <modules>
     <module>mybatis-generator-core</module>
-    <module>mybatis-generator-systests-domtests</module>
     <module>mybatis-generator-maven-plugin</module>
-    <module>mybatis-generator-systests-common</module>
-    <module>mybatis-generator-systests-mybatis3</module>
-    <module>mybatis-generator-systests-mybatis3-java8</module>
-    <module>mybatis-generator-systests-ibatis2-java5</module>
   </modules>
 
   <profiles>
@@ -354,33 +344,6 @@
           <exists>format.xml</exists>
         </file>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>net.revelc.code.formatter</groupId>
-            <artifactId>formatter-maven-plugin</artifactId>
-            <configuration>
-              <configFile>eclipse-formatter-config-4space.xml</configFile>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>format</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>jdk18</id>
-      <activation>
-        <jdk>1.8</jdk>
-      </activation>
-      <modules>
-        <module>mybatis-generator-systests-ibatis2-java2</module>
-      </modules>
     </profile>
     <profile>
       <id>jdk9</id>
